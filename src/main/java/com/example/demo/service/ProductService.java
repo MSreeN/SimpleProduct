@@ -46,15 +46,15 @@ public class ProductService {
     }
   }
 
-  public String updateProduct(Product product){
-    Optional<Product> optionalProduct = productRepo.findById((product.getProductId()));
+  public String updateProduct(Product product, String prodId){
+    Optional<Product> optionalProduct = productRepo.findById(prodId);
     if(optionalProduct.isPresent()){
       Product prod = optionalProduct.get();
       prod.setProductPrice(product.getProductPrice());
       prod.setProductQty(product.getProductQty());
       productRepo.save(prod);
       return "Product details updated "
-      +prod;
+      +prod.toString();
     }
     else{
       return "No such product";
